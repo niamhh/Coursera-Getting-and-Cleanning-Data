@@ -21,7 +21,6 @@ setwd("~/R/Coursea/Stats 03 - Getting and Cleaning Data")
 
 # 1. Merges the training and the test sets to create one data set.
 # =========================================================================
-
 # Read test set
 test_x <- read.table("project/test/X_test.txt", header = F, sep = "")
 test_y <- read.table("project/test/Y_test.txt", header = F, sep = "")
@@ -45,7 +44,6 @@ subject_data <- rbind(train_subject, test_subject)
 # 2. Extracts only the measurements on the mean
 # and standard deviation for each measurement. 
 # =========================================================================
-
 # Read features file
 features <- read.table("project/features.txt", col.names = c("id", "name"))
 
@@ -65,7 +63,6 @@ data_y[, 1] <- activities[data_y[, 1] , 2]
 
 # 4. Appropriately labels the data set with descriptive variable names.
 # =========================================================================
-
 data_set <- cbind(subject_data, data_y, data_x)
 colnames(data_set) <- c("subject", "activity", as.character(features$name))
 
@@ -73,23 +70,22 @@ colnames(data_set) <- c("subject", "activity", as.character(features$name))
 # 5. From the data set in step 4, creates a second, independent tidy data 
 # set with the average of each variable for each activity and each subject.
 # =========================================================================
-
-# Select aunique values
+# Select unique values
 unique_subject  <- as.numeric(unique(data_set$subject))
 unique_activity <- unique(data_set$activity)
 
 results <- c()
 for(i in 1:length(unique_subject)) {
-  subject <- unique_subject[i]                          # select the subject
+  subject <- unique_subject[i]                          # Select subject
   filter1 <- data_set[data_set$subject == subject, ]    # Filter by subject
   for(j in 1:length(unique_activity)) {
     # Loop over all activities
-    activity <- unique_activity[j]                      # select activity  
+    activity <- unique_activity[j]                      # Select activity  
     filter2 <- filter1[filter1$activity == activity, ]  # Filter by Activity
     average <- apply(filter2[,(3:563)], 2, mean)
     
-    # save averages
-    res <- cbind(subject, activity, t(average))         # Tempral matrix
+    # Save averages
+    res <- cbind(subject, activity, t(average))         # Temporal matrix
     results <- rbind(results, res)                      # Results matrix
   }
 }
