@@ -16,7 +16,6 @@
 # 0. Configuration
 # =========================================================================
 options(stringsAsFactors = TRUE)
-library("dplyr")
 setwd("~/R/Coursea/Stats 03 - Getting and Cleaning Data")
 
 
