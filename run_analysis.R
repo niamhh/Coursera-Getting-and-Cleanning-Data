@@ -50,7 +50,7 @@ subject_data <- rbind(train_subject, test_subject)
 # Read features file
 features <- read.table("project/features.txt", col.names = c("id", "name"))
 
-# Get only word that has 'mean' or 'std'
+# Get only words that contains 'mean' or 'std'
 features_select        <- grep(".*mean.*|.*std.*", features$name)
 features_select.names  <- features[features_select, 2]
 names(features_select) <- features_select.names
